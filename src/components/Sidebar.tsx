@@ -1,8 +1,10 @@
 "use client";
 
 import {
+  Divider,
   Drawer,
   List,
+  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -12,10 +14,13 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import SchoolIcon from "@mui/icons-material/School";
 import ClassIcon from "@mui/icons-material/Class";
 import Link from "next/link";
+import SchoolYearSelect from "./SchoolYearSelect";
 
 const drawerWidth = 240;
 
 export default function Sidebar() {
+  const schoolYearOptions = [2025, 2026];
+
   return (
     <Drawer
       variant="permanent"
@@ -30,6 +35,12 @@ export default function Sidebar() {
     >
       <Toolbar />
       <List>
+        <ListItem>
+          <SchoolYearSelect schoolYearOptions={schoolYearOptions} />
+        </ListItem>
+
+        <Divider />
+
         <ListItemButton component={Link} href="/dashboard">
           <ListItemIcon>
             <AccountBoxIcon />
