@@ -3,6 +3,7 @@
 import PageContainer from "@/components/PageContainer";
 import { Box, Stepper, Step, StepLabel, Stack, Button } from "@mui/material";
 import { useState } from "react";
+import EnrollmentStudentTable from "./EnrollmentStudentProfilePanel";
 
 const steps = [
   "Student Profile",
@@ -31,6 +32,8 @@ export default function EnrollmentPage() {
             );
           })}
         </Stepper>
+
+        {activeStep === 0 && <EnrollmentStudentTable />}
 
         <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
           {activeStep > 0 && (
