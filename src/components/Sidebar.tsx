@@ -1,13 +1,15 @@
 "use client";
 
 import {
+  Box,
   Divider,
   Drawer,
+  IconButton,
   List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  styled,
   Toolbar,
 } from "@mui/material";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
@@ -15,29 +17,64 @@ import SchoolIcon from "@mui/icons-material/School";
 import ClassIcon from "@mui/icons-material/Class";
 import Link from "next/link";
 import SchoolYearSelect from "./SchoolYearSelect";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 
-export default function Sidebar() {
+interface SidebarProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  padding: theme.spacing(0, 1),
+  ...theme.mixins.toolbar,
+  justifyContent: "flex-end",
+}));
+
+export default function Sidebar({ open = true, onClose }: SidebarProps) {
   const schoolYearOptions = [2025, 2026];
 
   return (
     <Drawer
-      variant="permanent"
+      variant="persistent"
+      anchor="left"
+      open={open}
       sx={{
-        width: drawerWidth,
-        flexShrink: 0,
+        width: open ? drawerWidth : 0,
         [`& .MuiDrawer-paper`]: {
           width: drawerWidth,
           boxSizing: "border-box",
+          overflow: "visible",
         },
       }}
     >
       <Toolbar />
       <List>
-        <ListItem>
-          <SchoolYearSelect schoolYearOptions={schoolYearOptions} />
-        </ListItem>
+        <DrawerHeader>
+          <Box sx={{ padding: 2 }} flexGrow={1}>
+            <SchoolYearSelect schoolYearOptions={schoolYearOptions} />
+          </Box>
+
+          <IconButton
+            onClick={onClose}
+            sx={{
+              position: "absolute",
+              right: -12,
+              backgroundColor: "primary.main",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "primary.dark",
+              },
+              height: 24,
+              width: 24,
+            }}
+          >
+            <ChevronLeftIcon />
+          </IconButton>
+        </DrawerHeader>
 
         <Divider />
 

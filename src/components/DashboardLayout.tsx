@@ -10,12 +10,15 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Sidebar from "./Sidebar";
+import { useState } from "react";
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [open, setOpen] = useState(true);
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -28,7 +31,12 @@ export default function DashboardLayout({
         }}
       >
         <Toolbar>
-          <IconButton color="inherit" edge="start" sx={{ mr: 2 }}>
+          <IconButton
+            color="inherit"
+            edge="start"
+            sx={[{ mr: 2 }, open && { display: "none" }]}
+            onClick={() => setOpen(true)}
+          >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
@@ -38,7 +46,7 @@ export default function DashboardLayout({
       </AppBar>
 
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar open={open} onClose={() => setOpen(false)} />
 
       {/* Main content */}
       <Box
