@@ -53,6 +53,8 @@ export default function DashboardLayout({
         component="main"
         sx={{
           flexGrow: 1,
+          flexDirection: "column",
+          overflow: "auto",
           p: 3,
         }}
       >

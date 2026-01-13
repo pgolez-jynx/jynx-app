@@ -18,6 +18,7 @@ import ClassIcon from "@mui/icons-material/Class";
 import Link from "next/link";
 import SchoolYearSelect from "./SchoolYearSelect";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 
 const drawerWidth = 250;
 
@@ -77,6 +78,13 @@ export default function Sidebar({ open = true, onClose }: SidebarProps) {
         </DrawerHeader>
 
         <Divider />
+
+        <ListItemButton component={Link} href="/enrollment">
+          <ListItemIcon>
+            <AppRegistrationIcon />
+          </ListItemIcon>
+          <ListItemText primary="Enrollment" />
+        </ListItemButton>
 
         <ListItemButton component={Link} href="/dashboard">
           <ListItemIcon>
