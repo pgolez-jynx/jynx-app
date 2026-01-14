@@ -4,10 +4,11 @@ import PageContainer from "@/components/PageContainer";
 import { Box, Stepper, Step, StepLabel, Stack, Button } from "@mui/material";
 import { useState } from "react";
 import EnrollmentStudentProfilePanel from "./EnrollmentStudentProfilePanel";
+import EnrollmentSectionAssignmentPanel from "./EnrollmentSectionAssignmentPanel";
 
 const steps = [
   "Student Profile",
-  "School Year Enrollment",
+  "Section Assignment",
   "Document Submission",
   "Review & Confirm",
 ];
@@ -34,6 +35,7 @@ export default function EnrollmentPage() {
         </Stepper>
 
         {activeStep === 0 && <EnrollmentStudentProfilePanel />}
+        {activeStep === 1 && <EnrollmentSectionAssignmentPanel />}
 
         <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
           {activeStep > 0 && (
