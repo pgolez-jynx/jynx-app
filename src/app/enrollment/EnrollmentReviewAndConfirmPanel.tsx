@@ -1,8 +1,17 @@
 "use client";
 
 import { Divider, Grid, Paper, Typography } from "@mui/material";
+import { Enrollment } from "./model";
 
-export default function EnrollmentReviewAndConfirmPanel() {
+export default function EnrollmentReviewAndConfirmPanel({
+  enrollment,
+}: {
+  enrollment: Enrollment;
+}) {
+  const { student } = enrollment;
+
+  const gender = student?.gender === "M" ? "Male" : "Female";
+
   return (
     <>
       <Typography variant="h6">Review & Confirm</Typography>
@@ -15,35 +24,35 @@ export default function EnrollmentReviewAndConfirmPanel() {
           </Grid>
           <Grid container size={12}>
             <Grid size={2}>
-              <Typography variant="subtitle2">First Name</Typography>
-              <Typography fontWeight="bold">John</Typography>
+              <Typography variant="subtitle2">Family Name</Typography>
+              <Typography fontWeight="bold">{student?.familyName}</Typography>
             </Grid>
             <Grid size={2}>
               <Typography variant="subtitle2">Middle Name</Typography>
-              <Typography fontWeight="bold">Tavera</Typography>
+              <Typography fontWeight="bold">{student?.middleName}</Typography>
             </Grid>
             <Grid size={2}>
-              <Typography variant="subtitle2">Last Name</Typography>
-              <Typography fontWeight="bold">Doe</Typography>
+              <Typography variant="subtitle2">Given Name</Typography>
+              <Typography fontWeight="bold">{student?.givenName}</Typography>
             </Grid>
             <Grid size={2}>
               <Typography variant="subtitle2">Suffix</Typography>
-              <Typography fontWeight="bold">Jr</Typography>
+              <Typography fontWeight="bold">{student?.suffix}</Typography>
             </Grid>
           </Grid>
 
           <Grid container size={12}>
             <Grid size={2}>
               <Typography variant="subtitle2">Gender</Typography>
-              <Typography fontWeight="bold">Male</Typography>
+              <Typography fontWeight="bold">{gender}</Typography>
             </Grid>
             <Grid size={2}>
               <Typography variant="subtitle2">Date of Birth</Typography>
-              <Typography fontWeight="bold">April 04, 2004</Typography>
+              <Typography fontWeight="bold">{student?.dateOfBirth}</Typography>
             </Grid>
             <Grid size={2}>
               <Typography variant="subtitle2">Nationality</Typography>
-              <Typography fontWeight="bold">Filipino</Typography>
+              <Typography fontWeight="bold">{student?.nationality}</Typography>
             </Grid>
           </Grid>
 

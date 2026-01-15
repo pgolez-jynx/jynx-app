@@ -6,11 +6,16 @@ import { useState } from "react";
 import EnrollmentStudentProfilePanel from "./EnrollmentStudentProfilePanel";
 import EnrollmentSectionAssignmentPanel from "./EnrollmentSectionAssignmentPanel";
 import EnrollmentReviewAndConfirmPanel from "./EnrollmentReviewAndConfirmPanel";
+import { Student } from "@/services/student.client";
+import { Enrollment } from "./model";
 
 const steps = ["Student Profile", "Grade Level", "Review & Confirm"];
 
 export default function EnrollmentPage() {
   const [activeStep, setActiveStep] = useState(0);
+  const [enrollment, setEnrollment] = useState<Enrollment>({
+    student: null,
+  });
 
   const handlePreviousStep = () => {
     setActiveStep(activeStep - 1);
@@ -18,6 +23,16 @@ export default function EnrollmentPage() {
 
   const handleNextStep = () => {
     setActiveStep(activeStep + 1);
+  };
+
+  /**
+   * Student -related handler
+   */
+  const handleStudentUpdate = (student: Student | null) => {
+    setEnrollment((prev) => ({
+      ...prev,
+      student,
+    }));
   };
 
   return (
@@ -37,10 +52,16 @@ export default function EnrollmentPage() {
             );
           })}
         </Stepper>
-
-        {activeStep === 0 && <EnrollmentStudentProfilePanel />}
+        {activeStep === 0 && (
+          <EnrollmentStudentProfilePanel
+            student={enrollment.student}
+            onUpdate={handleStudentUpdate}
+          />
+        )}
         {activeStep === 1 && <EnrollmentSectionAssignmentPanel />}
-        {activeStep === 2 && <EnrollmentReviewAndConfirmPanel />}
+        {activeStep === 2 && (
+          <EnrollmentReviewAndConfirmPanel enrollment={enrollment} />
+        )}
 
         <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
           {activeStep > 0 && (
