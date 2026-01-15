@@ -1,16 +1,24 @@
 "use client";
 
 import PageContainer from "@/components/PageContainer";
-import { Box, Stepper, Step, StepLabel, Stack, Button } from "@mui/material";
+import { Box, Stepper, Step, Stack, Button, StepButton } from "@mui/material";
 import { useState } from "react";
 import EnrollmentStudentProfilePanel from "./EnrollmentStudentProfilePanel";
 import EnrollmentSectionAssignmentPanel from "./EnrollmentSectionAssignmentPanel";
 import EnrollmentReviewAndConfirmPanel from "./EnrollmentReviewAndConfirmPanel";
 
-const steps = ["Student Profile", "Section Assignment", "Review & Confirm"];
+const steps = ["Student Profile", "Grade Level", "Review & Confirm"];
 
 export default function EnrollmentPage() {
-  const [activeStep, _setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+
+  const handlePreviousStep = () => {
+    setActiveStep(activeStep - 1);
+  };
+
+  const handleNextStep = () => {
+    setActiveStep(activeStep + 1);
+  };
 
   return (
     <PageContainer>
@@ -24,7 +32,7 @@ export default function EnrollmentPage() {
 
             return (
               <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
+                <StepButton {...labelProps}>{label}</StepButton>
               </Step>
             );
           })}
@@ -36,31 +44,20 @@ export default function EnrollmentPage() {
 
         <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
           {activeStep > 0 && (
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
-              onClick={() => {}}
-              sx={{ mr: 1 }}
-            >
+            <Button color="inherit" onClick={handlePreviousStep} sx={{ mr: 1 }}>
               Back
             </Button>
           )}
           <Box sx={{ flex: "1 1 auto" }} />
-          <Button onClick={() => {}} sx={{ mr: 1 }}>
-            Next
-          </Button>
-          {/* {activeStep !== steps.length &&
-            (completed[activeStep] ? (
-              <Typography variant="caption" sx={{ display: "inline-block" }}>
-                Step {activeStep + 1} already completed
-              </Typography>
-            ) : (
-              <Button onClick={handleComplete}>
-                {completedSteps() === totalSteps() - 1
-                  ? "Finish"
-                  : "Complete Step"}
-              </Button>
-            ))} */}
+          {activeStep < steps.length - 1 ? (
+            <Button variant="contained" onClick={handleNextStep} sx={{ mr: 1 }}>
+              Next
+            </Button>
+          ) : (
+            <Button variant="contained" onClick={handleNextStep} sx={{ mr: 1 }}>
+              Submit
+            </Button>
+          )}
         </Box>
       </Stack>
     </PageContainer>
