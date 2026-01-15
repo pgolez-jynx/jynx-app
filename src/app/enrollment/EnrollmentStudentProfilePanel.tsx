@@ -66,7 +66,7 @@ export default function EnrollmentStudentProfilePanel() {
                 sx={{ borderStyle: "dashed", borderColor: "divider" }}
               >
                 <Typography variant="subtitle2" color="primary.light">
-                  Student Details
+                  Student Information
                 </Typography>
               </Divider>
 
@@ -111,13 +111,14 @@ export default function EnrollmentStudentProfilePanel() {
               <Divider
                 textAlign="left"
                 sx={{ borderStyle: "dashed", borderColor: "divider" }}
-              >
-                <Typography variant="subtitle2" color="primary.light">
-                  Guardian / Parent Details
-                </Typography>
-              </Divider>
+              />
 
               <Stack component="form" spacing={2}>
+                <Box>
+                  <Typography variant="subtitle2" color="primary.light">
+                    Parent/Guardian Information
+                  </Typography>
+                </Box>
                 <Stack direction="row" spacing={2}>
                   <Box flex={3}>
                     <StandardTextField fullWidth label="Name" />

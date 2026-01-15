@@ -5,13 +5,9 @@ import { Box, Stepper, Step, StepLabel, Stack, Button } from "@mui/material";
 import { useState } from "react";
 import EnrollmentStudentProfilePanel from "./EnrollmentStudentProfilePanel";
 import EnrollmentSectionAssignmentPanel from "./EnrollmentSectionAssignmentPanel";
+import EnrollmentReviewAndConfirmPanel from "./EnrollmentReviewAndConfirmPanel";
 
-const steps = [
-  "Student Profile",
-  "Section Assignment",
-  "Document Submission",
-  "Review & Confirm",
-];
+const steps = ["Student Profile", "Section Assignment", "Review & Confirm"];
 
 export default function EnrollmentPage() {
   const [activeStep, _setActiveStep] = useState(0);
@@ -36,6 +32,7 @@ export default function EnrollmentPage() {
 
         {activeStep === 0 && <EnrollmentStudentProfilePanel />}
         {activeStep === 1 && <EnrollmentSectionAssignmentPanel />}
+        {activeStep === 2 && <EnrollmentReviewAndConfirmPanel />}
 
         <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
           {activeStep > 0 && (
