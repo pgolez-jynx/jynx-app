@@ -128,6 +128,17 @@ export default function EnrollmentStudentProfilePanel({
                 <Box flex={1}>
                   <TextField
                     variant="standard"
+                    fullWidth
+                    label="Given Name"
+                    value={student?.givenName}
+                    onChange={(e) =>
+                      handleStudentInfoChange("givenName", e.target.value)
+                    }
+                  />
+                </Box>
+                <Box flex={1}>
+                  <TextField
+                    variant="standard"
                     label="Middle Name"
                     value={student?.middleName}
                     onChange={(e) =>
@@ -135,17 +146,6 @@ export default function EnrollmentStudentProfilePanel({
                         "middleName",
                         e.target.value || undefined
                       )
-                    }
-                  />
-                </Box>
-                <Box flex={1}>
-                  <TextField
-                    variant="standard"
-                    fullWidth
-                    label="Given Name"
-                    value={student?.givenName}
-                    onChange={(e) =>
-                      handleStudentInfoChange("givenName", e.target.value)
                     }
                   />
                 </Box>

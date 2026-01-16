@@ -28,12 +28,12 @@ export default function EnrollmentReviewAndConfirmPanel({
               <Typography fontWeight="bold">{student?.familyName}</Typography>
             </Grid>
             <Grid size={2}>
-              <Typography variant="subtitle2">Middle Name</Typography>
-              <Typography fontWeight="bold">{student?.middleName}</Typography>
-            </Grid>
-            <Grid size={2}>
               <Typography variant="subtitle2">Given Name</Typography>
               <Typography fontWeight="bold">{student?.givenName}</Typography>
+            </Grid>
+            <Grid size={2}>
+              <Typography variant="subtitle2">Middle Name</Typography>
+              <Typography fontWeight="bold">{student?.middleName}</Typography>
             </Grid>
             <Grid size={2}>
               <Typography variant="subtitle2">Suffix</Typography>
