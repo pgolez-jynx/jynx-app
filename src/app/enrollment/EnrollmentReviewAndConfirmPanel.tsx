@@ -110,17 +110,21 @@ export default function EnrollmentReviewAndConfirmPanel({
         <Grid container spacing={2} sx={{ py: 2 }}>
           <Grid container size={12}>
             <Typography variant="subtitle1" color="primary.main">
-              Enrollment Information
+              Grade Level
             </Typography>
           </Grid>
           <Grid container size={12}>
             <Grid size={2}>
               <Typography variant="subtitle2">Grade Level</Typography>
-              <Typography fontWeight="bold">13</Typography>
+              <Typography fontWeight="bold">{enrollment.gradeLevel}</Typography>
             </Grid>
             <Grid size={2}>
               <Typography variant="subtitle2">Section</Typography>
-              <Typography fontWeight="italic">-</Typography>
+              {enrollment?.section ? (
+                <Typography fontWeight="bold">{enrollment.section}</Typography>
+              ) : (
+                <Typography fontWeight="italic">(unassigned)</Typography>
+              )}
             </Grid>
           </Grid>
         </Grid>

@@ -15,6 +15,8 @@ export default function EnrollmentPage() {
   const [activeStep, setActiveStep] = useState(0);
   const [enrollment, setEnrollment] = useState<Enrollment>({
     student: null,
+    gradeLevel: null,
+    section: null,
   });
 
   const handlePreviousStep = () => {
@@ -32,6 +34,16 @@ export default function EnrollmentPage() {
     setEnrollment((prev) => ({
       ...prev,
       student,
+    }));
+  };
+
+  const handleEnrollmentUpdate = (data: {
+    gradeLevel?: string;
+    section?: string;
+  }) => {
+    setEnrollment((prev) => ({
+      ...prev,
+      ...data,
     }));
   };
 
@@ -58,7 +70,13 @@ export default function EnrollmentPage() {
             onUpdate={handleStudentUpdate}
           />
         )}
-        {activeStep === 1 && <EnrollmentSectionAssignmentPanel />}
+        {activeStep === 1 && (
+          <EnrollmentSectionAssignmentPanel
+            gradeLevel={enrollment.gradeLevel}
+            section={enrollment.section}
+            onUpdate={handleEnrollmentUpdate}
+          />
+        )}
         {activeStep === 2 && (
           <EnrollmentReviewAndConfirmPanel enrollment={enrollment} />
         )}
