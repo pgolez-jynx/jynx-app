@@ -78,26 +78,45 @@ export default function EnrollmentReviewAndConfirmPanel({
           <Grid container size={12}>
             <Grid size={4}>
               <Typography variant="subtitle2">Name</Typography>
-              <Typography fontWeight="bold">Joshua W. Doe</Typography>
+              <Typography fontWeight="bold">
+                {enrollment.guardian?.name}
+              </Typography>
             </Grid>
             <Grid size={2}>
               <Typography variant="subtitle2">Relationship</Typography>
-              <Typography fontWeight="bold">Father</Typography>
+              <Typography fontWeight="bold">
+                {enrollment.guardian?.relationship}
+              </Typography>
             </Grid>
             <Grid size={2}>
               <Typography variant="subtitle2">Contact Number</Typography>
-              <Typography fontWeight="bold">(+63)970000000</Typography>
+              <Typography fontWeight="bold">
+                {enrollment.guardian?.contactNumber}
+              </Typography>
             </Grid>
             <Grid size={2}>
               <Typography variant="subtitle2">Email Address</Typography>
-              <Typography fontWeight="bold">joshua_doe@example.com</Typography>
+              <Typography fontWeight="bold">
+                {enrollment.guardian?.emailAddress}
+              </Typography>
             </Grid>
           </Grid>
 
           <Grid container size={12}>
             <Grid size={12}>
               <Typography variant="subtitle2">Address</Typography>
-              <Typography fontWeight="bold">Apas, Lahug, Cebu City</Typography>
+              <Typography component="span" fontWeight="bold">
+                {enrollment.guardian?.addressSameAsStudent ? (
+                  <>
+                    {enrollment.student?.address}{" "}
+                    <Typography component="span" fontWeight="italic">
+                      (same as student&apos;s)
+                    </Typography>
+                  </>
+                ) : (
+                  enrollment.guardian?.address
+                )}
+              </Typography>
             </Grid>
           </Grid>
         </Grid>
