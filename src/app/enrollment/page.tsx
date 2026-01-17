@@ -8,8 +8,14 @@ import EnrollmentSectionAssignmentPanel from "./EnrollmentSectionAssignmentPanel
 import EnrollmentReviewAndConfirmPanel from "./EnrollmentReviewAndConfirmPanel";
 import { Student } from "@/services/student.client";
 import { Enrollment } from "./model";
+import EnrollmentGuardianInfoPanel from "./EnrollmentGuardianInfoPanel";
 
-const steps = ["Student Profile", "Grade Level", "Review & Confirm"];
+const steps = [
+  "Student Profile",
+  "Guardian Information",
+  "Grade Level",
+  "Review & Confirm",
+];
 
 export default function EnrollmentPage() {
   const [activeStep, setActiveStep] = useState(0);
@@ -17,6 +23,7 @@ export default function EnrollmentPage() {
     student: null,
     gradeLevel: null,
     section: null,
+    guardian: null,
   });
 
   const handlePreviousStep = () => {
@@ -30,14 +37,8 @@ export default function EnrollmentPage() {
   /**
    * Student -related handler
    */
-  const handleStudentUpdate = (student: Student | null) => {
-    setEnrollment((prev) => ({
-      ...prev,
-      student,
-    }));
-  };
-
   const handleEnrollmentUpdate = (data: {
+    student?: Student | null;
     gradeLevel?: string;
     section?: string;
   }) => {
@@ -67,17 +68,25 @@ export default function EnrollmentPage() {
         {activeStep === 0 && (
           <EnrollmentStudentProfilePanel
             student={enrollment.student}
-            onUpdate={handleStudentUpdate}
+            onUpdate={handleEnrollmentUpdate}
           />
         )}
+
         {activeStep === 1 && (
+          <EnrollmentGuardianInfoPanel
+            student={enrollment.student}
+            guardian={enrollment.guardian}
+          />
+        )}
+
+        {activeStep === 2 && (
           <EnrollmentSectionAssignmentPanel
             gradeLevel={enrollment.gradeLevel}
             section={enrollment.section}
             onUpdate={handleEnrollmentUpdate}
           />
         )}
-        {activeStep === 2 && (
+        {activeStep === 3 && (
           <EnrollmentReviewAndConfirmPanel enrollment={enrollment} />
         )}
 

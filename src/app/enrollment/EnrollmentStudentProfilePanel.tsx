@@ -1,13 +1,17 @@
 "use client";
 
-import { fetchStudent, Student } from "@/services/student.client";
+import {
+  fetchStudent,
+  fetchStudentGuardians,
+  Guardian,
+  Student,
+} from "@/services/student.client";
 import {
   Paper,
   Typography,
   Box,
   TextField,
   Stack,
-  Divider,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -30,7 +34,10 @@ export default function EnrollmentStudentProfilePanel({
   onUpdate,
 }: {
   student: Student | null;
-  onUpdate: (student: Student | null) => void;
+  onUpdate: (data: {
+    student?: Student | null;
+    guardian?: Guardian | null;
+  }) => void;
 }) {
   const [mode, setMode] = useState<MODE>("new");
   const [studentId, setStudentId] = useState<string>("");
@@ -39,7 +46,6 @@ export default function EnrollmentStudentProfilePanel({
   const parseDateOfBirth = student?.dateOfBirth
     ? dayjs(student.dateOfBirth)
     : null;
-  console.log({ parseDateOfBirth });
 
   const handleModeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMode((event.target as HTMLInputElement).value as MODE);
@@ -47,14 +53,24 @@ export default function EnrollmentStudentProfilePanel({
 
   const handleSearchStudent = async () => {
     const student = await fetchStudent(studentId);
-    onUpdate(student);
+    onUpdate({ student });
     setStudentExists(!!student);
+    if (student) {
+      const guardians = await fetchStudentGuardians(studentId);
+      onUpdate({ guardian: guardians.length > 0 ? guardians[0] : undefined });
+    }
   };
 
   const handleStudentInfoChange = <K extends keyof Student>(
     key: K,
     value: Student[K]
-  ) => onUpdate({ ...student, [key]: value } as Student);
+  ) =>
+    onUpdate({
+      student: {
+        ...student,
+        [key]: value,
+      } as Student,
+    });
 
   return (
     <>
@@ -97,23 +113,9 @@ export default function EnrollmentStudentProfilePanel({
               </Stack>
             )}
           </Stack>
-        </Stack>
 
-        {(mode == "new" || studentExists) && (
-          <Stack spacing={2}>
-            <Divider
-              textAlign="left"
-              sx={{ borderStyle: "dashed", borderColor: "divider" }}
-            >
-              <Typography variant="subtitle2" color="primary.main"></Typography>
-            </Divider>
-
+          {(mode == "new" || studentExists) && (
             <Stack component="form" spacing={2}>
-              <Box>
-                <Typography variant="subtitle2" color="primary.main">
-                  Student Information
-                </Typography>
-              </Box>
               <Stack direction="row" spacing={2}>
                 <Box flex={1}>
                   <TextField
@@ -224,45 +226,8 @@ export default function EnrollmentStudentProfilePanel({
                 <Box flex={2} />
               </Stack>
             </Stack>
-
-            <Divider
-              textAlign="left"
-              sx={{ borderStyle: "dashed", borderColor: "divider" }}
-            />
-
-            <Stack component="form" spacing={2}>
-              <Box>
-                <Typography variant="subtitle2" color="primary.main">
-                  Parent/Guardian Information
-                </Typography>
-              </Box>
-              <Stack direction="row" spacing={2}>
-                <Box flex={3}>
-                  <TextField variant="standard" fullWidth label="Name" />
-                </Box>
-                <Box flex={1}>
-                  <TextField variant="standard" label="Relationship" />
-                </Box>
-                <Box flex={2} />
-              </Stack>
-              <Stack direction="row" spacing={2}>
-                <Box flex={1}>
-                  <TextField variant="standard" label="Contact Number" />
-                </Box>
-                <Box flex={1}>
-                  <TextField
-                    variant="standard"
-                    fullWidth
-                    label="Email Address"
-                  />
-                </Box>
-                <Box flex={4}>
-                  <TextField variant="standard" fullWidth label="Address" />
-                </Box>
-              </Stack>
-            </Stack>
-          </Stack>
-        )}
+          )}
+        </Stack>
       </Paper>
     </>
   );

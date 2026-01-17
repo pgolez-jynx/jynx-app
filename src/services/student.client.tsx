@@ -10,6 +10,15 @@ export interface Student {
   address?: string;
 }
 
+export interface Guardian {
+  name: string;
+  relationship: string;
+  contactNumber: string;
+  emailAddress: string;
+  addressSameAsStudent?: boolean;
+  address?: string;
+}
+
 export const fetchStudent = (studentId: string): Student | null => {
   switch (studentId) {
     case "1234":
@@ -27,4 +36,25 @@ export const fetchStudent = (studentId: string): Student | null => {
     default:
       return null;
   }
+};
+
+export const fetchStudentGuardians = (studentId: string): Guardian[] => {
+  return studentId === "1234"
+    ? [
+        {
+          name: "Jane Doe",
+          relationship: "Mother",
+          contactNumber: "09171234567",
+          emailAddress: "jane.doe@example.com",
+          addressSameAsStudent: true,
+        },
+        {
+          name: "John Doe",
+          relationship: "Father",
+          contactNumber: "09171234568",
+          emailAddress: "john.doe@example.com",
+          address: "381, Other St, Cityville, Countryland",
+        },
+      ]
+    : [];
 };
