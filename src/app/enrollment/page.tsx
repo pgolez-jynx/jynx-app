@@ -7,7 +7,7 @@ import EnrollmentStudentProfilePanel from "./EnrollmentStudentProfilePanel";
 import EnrollmentSectionAssignmentPanel from "./EnrollmentSectionAssignmentPanel";
 import EnrollmentReviewAndConfirmPanel from "./EnrollmentReviewAndConfirmPanel";
 import { Student } from "@/services/student.client";
-import { Enrollment } from "./model";
+import { AddEnrollmentDto } from "./dto";
 import EnrollmentGuardianInfoPanel from "./EnrollmentGuardianInfoPanel";
 
 const steps = [
@@ -19,7 +19,7 @@ const steps = [
 
 export default function EnrollmentPage() {
   const [activeStep, setActiveStep] = useState(0);
-  const [enrollment, setEnrollment] = useState<Enrollment>({
+  const [addEnrollmentDto, setAddEnrollmentDto] = useState<AddEnrollmentDto>({
     student: null,
     gradeLevel: null,
     section: null,
@@ -42,7 +42,7 @@ export default function EnrollmentPage() {
     gradeLevel?: string;
     section?: string;
   }) => {
-    setEnrollment((prev) => ({
+    setAddEnrollmentDto((prev) => ({
       ...prev,
       ...data,
     }));
@@ -67,27 +67,27 @@ export default function EnrollmentPage() {
         </Stepper>
         {activeStep === 0 && (
           <EnrollmentStudentProfilePanel
-            student={enrollment.student}
+            student={addEnrollmentDto.student}
             onUpdate={handleEnrollmentUpdate}
           />
         )}
 
         {activeStep === 1 && (
           <EnrollmentGuardianInfoPanel
-            student={enrollment.student}
-            guardian={enrollment.guardian}
+            student={addEnrollmentDto.student}
+            guardian={addEnrollmentDto.guardian}
           />
         )}
 
         {activeStep === 2 && (
           <EnrollmentSectionAssignmentPanel
-            gradeLevel={enrollment.gradeLevel}
-            section={enrollment.section}
+            gradeLevel={addEnrollmentDto.gradeLevel}
+            section={addEnrollmentDto.section}
             onUpdate={handleEnrollmentUpdate}
           />
         )}
         {activeStep === 3 && (
-          <EnrollmentReviewAndConfirmPanel enrollment={enrollment} />
+          <EnrollmentReviewAndConfirmPanel enrollment={addEnrollmentDto} />
         )}
 
         <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>

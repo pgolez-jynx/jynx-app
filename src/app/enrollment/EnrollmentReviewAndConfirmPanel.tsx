@@ -1,12 +1,12 @@
 "use client";
 
 import { Divider, Grid, Paper, Typography } from "@mui/material";
-import { Enrollment } from "./model";
+import { AddEnrollmentDto } from "./dto";
 
 export default function EnrollmentReviewAndConfirmPanel({
   enrollment,
 }: {
-  enrollment: Enrollment;
+  enrollment: AddEnrollmentDto;
 }) {
   const { student } = enrollment;
 
