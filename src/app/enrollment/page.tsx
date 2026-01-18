@@ -41,13 +41,15 @@ export default function EnrollmentPage() {
     {
       field: "dateOfBirth",
       headerName: "Date of Birth",
-      minWidth: 200,
+      sortable: false,
+      minWidth: 150,
       flex: 1,
       valueFormatter: formatDate,
     },
     {
       field: "gender",
       headerName: "Gender",
+      sortable: false,
       minWidth: 80,
       flex: 1,
       align: "center",
@@ -69,8 +71,8 @@ export default function EnrollmentPage() {
         </div>
       ),
     },
-    { field: "gradeLevel", headerName: "Grade Level", minWidth: 200, flex: 1 },
-    { field: "section", headerName: "Section", minWidth: 200, flex: 1 },
+    { field: "gradeLevel", headerName: "Grade Level", minWidth: 150, flex: 1 },
+    { field: "section", headerName: "Section", minWidth: 150, flex: 1 },
     {
       field: "enrollmentDate",
       headerName: "Enrollment Date",
@@ -108,7 +110,12 @@ export default function EnrollmentPage() {
             autoHeight={false}
             density="standard"
             pageSizeOptions={[25, 50, 100, 250]}
-            initialState={{ pagination: { paginationModel: { pageSize: 50 } } }}
+            initialState={{
+              pagination: { paginationModel: { pageSize: 50 } },
+              sorting: {
+                sortModel: [{ field: "enrollmentDate", sort: "desc" }],
+              },
+            }}
           />
         </Box>
       </Paper>
