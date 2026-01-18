@@ -20,7 +20,7 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1024",
       student: {
-        givenName: "Lily",
+        givenName: "Lily Jane",
         familyName: "Anderson",
         middleName: null,
         suffix: null,
@@ -52,7 +52,7 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1026",
       student: {
-        givenName: "Emma",
+        givenName: "Emmanuela Niela",
         familyName: "Carter",
         middleName: null,
         suffix: null,
@@ -68,7 +68,7 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1027",
       student: {
-        givenName: "Liam",
+        givenName: "Lialsea",
         familyName: "Davis",
         middleName: null,
         suffix: null,
@@ -84,8 +84,8 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1028",
       student: {
-        givenName: "Olivia",
-        familyName: "Evans",
+        givenName: "Xander Zeus",
+        familyName: "Benitez",
         middleName: null,
         suffix: null,
         gender: "F",
@@ -100,8 +100,8 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1029",
       student: {
-        givenName: "Mason",
-        familyName: "Foster",
+        givenName: "Mason Kim",
+        familyName: "dela Cruz",
         middleName: null,
         suffix: null,
         gender: "M",
@@ -132,7 +132,7 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1031",
       student: {
-        givenName: "Ethan",
+        givenName: "Ethan Markova",
         familyName: "Harris",
         middleName: null,
         suffix: null,
@@ -164,7 +164,7 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1033",
       student: {
-        givenName: "Lucas",
+        givenName: "Lucas SKye",
         familyName: "Johnson",
         middleName: null,
         suffix: null,
@@ -180,7 +180,7 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1034",
       student: {
-        givenName: "Mia",
+        givenName: "Mia Jane",
         familyName: "Kim",
         middleName: null,
         suffix: null,
@@ -212,7 +212,7 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1036",
       student: {
-        givenName: "Chloe",
+        givenName: "Chloe Chaelle",
         familyName: "Martinez",
         middleName: null,
         suffix: null,
@@ -244,8 +244,8 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1038",
       student: {
-        givenName: "Harper",
-        familyName: "O'Connor",
+        givenName: "Harper Flaundrey",
+        familyName: "Macalasang",
         middleName: null,
         suffix: null,
         gender: "F",
@@ -260,7 +260,7 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1039",
       student: {
-        givenName: "Arjun",
+        givenName: "Arjun Jay",
         familyName: "Patel",
         middleName: null,
         suffix: null,
@@ -276,7 +276,7 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1040",
       student: {
-        givenName: "Zoe",
+        givenName: "Zoey",
         familyName: "Quinn",
         middleName: null,
         suffix: null,
@@ -308,8 +308,8 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1042",
       student: {
-        givenName: "Isabella",
-        familyName: "Smith",
+        givenName: "Isabella Candela Janice Mae",
+        familyName: "Aparagos",
         middleName: null,
         suffix: null,
         gender: "F",
@@ -565,8 +565,8 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1058",
       student: {
-        givenName: "Aria",
-        familyName: "Jackson",
+        givenName: "Aria Claire",
+        familyName: "dela Peña",
         middleName: null,
         suffix: null,
         gender: "F",
@@ -597,7 +597,7 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1060",
       student: {
-        givenName: "Violet",
+        givenName: "Violet Dennis",
         familyName: "Lopez",
         middleName: null,
         suffix: null,
@@ -645,7 +645,7 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1063",
       student: {
-        givenName: "Henry",
+        givenName: "Henry Luffy",
         familyName: "Ortiz",
         middleName: null,
         suffix: null,
@@ -661,7 +661,7 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1064",
       student: {
-        givenName: "Nora",
+        givenName: "Nora Mae",
         familyName: "Perez",
         middleName: null,
         suffix: null,
@@ -677,7 +677,7 @@ export const fetchEnrollments = (): Enrollment[] => {
     {
       id: "1065",
       student: {
-        givenName: "Samuel",
+        givenName: "Samuel George",
         familyName: "Quinto",
         middleName: null,
         suffix: null,

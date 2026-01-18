@@ -19,7 +19,8 @@ export default function EnrollmentPage() {
       const enrollments = await fetchEnrollments();
       const rowData = enrollments.map((enrollment) => ({
         id: enrollment.id,
-        name: `${enrollment.student.givenName} ${enrollment.student.familyName}`,
+        familyName: enrollment.student.familyName,
+        givenName: enrollment.student.givenName,
         gender: enrollment.student.gender,
         dateOfBirth: enrollment.student.dateOfBirth,
         gradeLevel: enrollment.gradeLevel,
@@ -34,10 +35,16 @@ export default function EnrollmentPage() {
 
   const columns: GridColDef[] = [
     {
-      field: "name",
-      headerName: "Student",
-      minWidth: 250,
-      flex: 3,
+      field: "familyName",
+      headerName: "Family Name",
+      minWidth: 150,
+      flex: 2,
+    },
+    {
+      field: "givenName",
+      headerName: "Given Name",
+      minWidth: 200,
+      flex: 2,
     },
     {
       field: "dateOfBirth",
