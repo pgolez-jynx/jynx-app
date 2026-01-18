@@ -2,13 +2,80 @@
 
 import PageContainer from "@/components/PageContainer";
 import { fetchEnrollments } from "@/services/enrollment.client";
-import { alpha, Box, Paper, useTheme } from "@mui/material";
+import {
+  alpha,
+  Box,
+  Button,
+  Paper,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { formatDate } from "../utils/date-utils";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
+import AddIcon from "@mui/icons-material/Add";
 import { blue, pink } from "@mui/material/colors";
+import Link from "next/link";
+
+const columns: GridColDef[] = [
+  {
+    field: "familyName",
+    headerName: "Family Name",
+    minWidth: 150,
+    flex: 2,
+  },
+  {
+    field: "givenName",
+    headerName: "Given Name",
+    minWidth: 200,
+    flex: 2,
+  },
+  {
+    field: "dateOfBirth",
+    headerName: "Date of Birth",
+    sortable: false,
+    minWidth: 150,
+    flex: 1,
+    valueFormatter: formatDate,
+  },
+  {
+    field: "gender",
+    headerName: "Gender",
+    sortable: false,
+    minWidth: 80,
+    flex: 1,
+    align: "center",
+    renderCell: ({ value: gender }) => (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        {gender === "F" ? (
+          <FemaleIcon sx={{ color: pink[500] }} />
+        ) : (
+          <MaleIcon sx={{ color: blue[500] }} />
+        )}
+      </div>
+    ),
+  },
+  { field: "gradeLevel", headerName: "Grade Level", minWidth: 150, flex: 1 },
+  { field: "section", headerName: "Section", minWidth: 150, flex: 1 },
+  {
+    field: "enrollmentDate",
+    headerName: "Enrollment Date",
+    minWidth: 200,
+    flex: 1,
+    valueFormatter: formatDate,
+  },
+];
 
 export default function EnrollmentPage() {
   const [rows, setRows] = useState<GridRowsProp>([]);
@@ -33,76 +100,32 @@ export default function EnrollmentPage() {
     loadEnrollments();
   }, []);
 
-  const columns: GridColDef[] = [
-    {
-      field: "familyName",
-      headerName: "Family Name",
-      minWidth: 150,
-      flex: 2,
-    },
-    {
-      field: "givenName",
-      headerName: "Given Name",
-      minWidth: 200,
-      flex: 2,
-    },
-    {
-      field: "dateOfBirth",
-      headerName: "Date of Birth",
-      sortable: false,
-      minWidth: 150,
-      flex: 1,
-      valueFormatter: formatDate,
-    },
-    {
-      field: "gender",
-      headerName: "Gender",
-      sortable: false,
-      minWidth: 80,
-      flex: 1,
-      align: "center",
-      renderCell: ({ value: gender }) => (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          {gender === "F" ? (
-            <FemaleIcon sx={{ color: pink[500] }} />
-          ) : (
-            <MaleIcon sx={{ color: blue[500] }} />
-          )}
-        </div>
-      ),
-    },
-    { field: "gradeLevel", headerName: "Grade Level", minWidth: 150, flex: 1 },
-    { field: "section", headerName: "Section", minWidth: 150, flex: 1 },
-    {
-      field: "enrollmentDate",
-      headerName: "Enrollment Date",
-      minWidth: 200,
-      flex: 1,
-      valueFormatter: formatDate,
-    },
-  ];
-
   return (
     <PageContainer>
-      <Paper
-        elevation={2}
-        sx={{
-          p: 4,
-          height: "800px",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        Enrollment Page
-        <Box sx={{ flex: 1, mt: 2, display: "flex", minHeight: 0 }}>
+      <Stack spacing={2}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Typography variant="h5">Enrollees</Typography>
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            component={Link}
+            href="/enrollment/new"
+          >
+            Enroll student
+          </Button>
+        </Stack>
+        <Paper
+          elevation={2}
+          sx={{
+            height: "800px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <DataGrid
             rows={rows}
             columns={columns}
@@ -125,8 +148,8 @@ export default function EnrollmentPage() {
               },
             }}
           />
-        </Box>
-      </Paper>
+        </Paper>
+      </Stack>
     </PageContainer>
   );
 }
