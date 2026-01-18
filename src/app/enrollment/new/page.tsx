@@ -1,7 +1,18 @@
 "use client";
 
 import PageContainer from "@/components/PageContainer";
-import { Box, Stepper, Step, Stack, Button, StepButton } from "@mui/material";
+import {
+  Box,
+  Stepper,
+  Step,
+  Stack,
+  Button,
+  StepButton,
+  Breadcrumbs,
+  Link as BreadcrumbLink,
+  Chip,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import EnrollmentStudentProfilePanel from "./EnrollmentStudentProfilePanel";
 import EnrollmentSectionAssignmentPanel from "./EnrollmentSectionAssignmentPanel";
@@ -9,6 +20,7 @@ import EnrollmentReviewAndConfirmPanel from "./EnrollmentReviewAndConfirmPanel";
 import { Student } from "@/services/student.client";
 import { AddEnrollmentDto } from "./dto";
 import EnrollmentGuardianInfoPanel from "./EnrollmentGuardianInfoPanel";
+import { EnrollmentIcon } from "@/components/Sidebar";
 
 const steps = [
   "Student Profile",
@@ -16,6 +28,22 @@ const steps = [
   "Grade Level",
   "Review & Confirm",
 ];
+
+const breadcrumbs = (
+  <Breadcrumbs separator="›" aria-label="breadcrumb">
+    <BreadcrumbLink
+      underline="hover"
+      key="1"
+      color="inherit"
+      href="/enrollment"
+    >
+      <Chip icon={<EnrollmentIcon />} label="Enrollment" />
+    </BreadcrumbLink>
+    <Typography key="2" sx={{ color: "primary.main" }} variant="body2">
+      Add New
+    </Typography>
+  </Breadcrumbs>
+);
 
 export default function EnrollmentPage() {
   const [activeStep, setActiveStep] = useState(0);
@@ -49,7 +77,7 @@ export default function EnrollmentPage() {
   };
 
   return (
-    <PageContainer>
+    <PageContainer breadcrumbs={breadcrumbs}>
       <Stack spacing={2}>
         <Stepper activeStep={activeStep}>
           {steps.map((label) => {
@@ -65,9 +93,6 @@ export default function EnrollmentPage() {
             );
           })}
         </Stepper>
-
-        {JSON.stringify(addEnrollmentDto)}
-
         {activeStep === 0 && (
           <EnrollmentStudentProfilePanel
             student={addEnrollmentDto.student}

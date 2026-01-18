@@ -4,11 +4,13 @@ import PageContainer from "@/components/PageContainer";
 import { fetchEnrollments } from "@/services/enrollment.client";
 import {
   alpha,
-  Box,
+  Breadcrumbs,
   Button,
+  Chip,
   Paper,
   Stack,
   Typography,
+  Link as BreadcrumbLink,
   useTheme,
 } from "@mui/material";
 import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
@@ -19,6 +21,7 @@ import FemaleIcon from "@mui/icons-material/Female";
 import AddIcon from "@mui/icons-material/Add";
 import { blue, pink } from "@mui/material/colors";
 import Link from "next/link";
+import { EnrollmentIcon } from "@/components/Sidebar";
 
 const columns: GridColDef[] = [
   {
@@ -77,6 +80,14 @@ const columns: GridColDef[] = [
   },
 ];
 
+const breadcrumbs = (
+  <Breadcrumbs separator="›" aria-label="breadcrumb">
+    <BreadcrumbLink underline="hover" key="1" href="/enrollment">
+      <Chip icon={<EnrollmentIcon />} label="Enrollment" color="primary" />
+    </BreadcrumbLink>
+  </Breadcrumbs>
+);
+
 export default function EnrollmentPage() {
   const [rows, setRows] = useState<GridRowsProp>([]);
   const theme = useTheme();
@@ -101,7 +112,7 @@ export default function EnrollmentPage() {
   }, []);
 
   return (
-    <PageContainer>
+    <PageContainer breadcrumbs={breadcrumbs}>
       <Stack spacing={2}>
         <Stack
           direction="row"
