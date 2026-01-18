@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { formatDate } from "../utils/date-utils";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
+import { blue, pink } from "@mui/material/colors";
 
 export default function EnrollmentPage() {
   const [rows, setRows] = useState<GridRowsProp>([]);
@@ -64,9 +65,9 @@ export default function EnrollmentPage() {
           }}
         >
           {gender === "F" ? (
-            <FemaleIcon color="secondary" />
+            <FemaleIcon sx={{ color: pink[500] }} />
           ) : (
-            <MaleIcon color="primary" />
+            <MaleIcon sx={{ color: blue[500] }} />
           )}
         </div>
       ),
