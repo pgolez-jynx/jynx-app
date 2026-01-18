@@ -10,6 +10,7 @@ import {
   ListItemIcon,
   ListItemText,
   styled,
+  SvgIconProps,
   Toolbar,
 } from "@mui/material";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
@@ -21,6 +22,10 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 
 const drawerWidth = 250;
+
+export const EnrollmentIcon: React.FC<SvgIconProps> = (props) => (
+  <AppRegistrationIcon {...props} />
+);
 
 interface SidebarProps {
   open: boolean;
@@ -81,7 +86,7 @@ export default function Sidebar({ open = true, onClose }: SidebarProps) {
 
         <ListItemButton component={Link} href="/enrollment">
           <ListItemIcon>
-            <AppRegistrationIcon />
+            <EnrollmentIcon />
           </ListItemIcon>
           <ListItemText primary="Enrollment" />
         </ListItemButton>
