@@ -151,6 +151,7 @@ export default function EnrollmentPage() {
             }}
             autoHeight={false}
             density="standard"
+            showToolbar
             pageSizeOptions={[25, 50, 100, 250]}
             initialState={{
               pagination: { paginationModel: { pageSize: 50 } },
