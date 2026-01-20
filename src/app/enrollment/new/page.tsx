@@ -21,6 +21,7 @@ import { Student } from "@/services/student.client";
 import { AddEnrollmentDto } from "./dto";
 import EnrollmentGuardianInfoPanel from "./EnrollmentGuardianInfoPanel";
 import { EnrollmentIcon } from "@/components/Sidebar";
+import { useRouter } from "next/navigation";
 
 const steps = [
   "Student Profile",
@@ -46,6 +47,8 @@ const breadcrumbs = (
 );
 
 export default function EnrollmentPage() {
+  const router = useRouter();
+
   const [activeStep, setActiveStep] = useState(0);
   const [addEnrollmentDto, setAddEnrollmentDto] = useState<AddEnrollmentDto>({
     student: null,
@@ -60,6 +63,10 @@ export default function EnrollmentPage() {
 
   const handleNextStep = () => {
     setActiveStep(activeStep + 1);
+  };
+
+  const handleSubmit = () => {
+    router.push("/enrollment");
   };
 
   /**
@@ -130,7 +137,7 @@ export default function EnrollmentPage() {
               Next
             </Button>
           ) : (
-            <Button variant="contained" onClick={handleNextStep} sx={{ mr: 1 }}>
+            <Button variant="contained" onClick={handleSubmit} sx={{ mr: 1 }}>
               Submit
             </Button>
           )}
