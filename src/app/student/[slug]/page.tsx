@@ -3,31 +3,9 @@
 import PageContainer from "@/components/PageContainer";
 import { fetchStudent, Student } from "@/services/student.client";
 import { Grid, Paper, Stack, TextField, Typography } from "@mui/material";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
-
-const FieldDisplay = ({
-  isEditing = false,
-  label = "Field Label",
-  value = "Value",
-  children,
-}: {
-  isEditing?: boolean;
-  label?: string;
-  value?: unknown;
-  children?: (props: { label?: string; value?: unknown }) => ReactNode;
-}) => {
-  return isEditing && children ? (
-    children({ label, value })
-  ) : (
-    <Stack>
-      <Typography variant="caption">{label}</Typography>
-      <Typography variant="body1" fontWeight="bold">
-        {value as string}
-      </Typography>
-    </Stack>
-  );
-};
+import FieldDisplay from "@/components/FieldDisplay";
 
 export default function StudentPage() {
   const [student, setStudent] = useState<Student>();
