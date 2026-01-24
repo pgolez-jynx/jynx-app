@@ -2,14 +2,23 @@
 
 import PageContainer from "@/components/PageContainer";
 import { fetchStudent, Student } from "@/services/student.client";
-import { Grid, Paper, Stack, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Grid,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
+import { useForm } from "react-hook-form";
 import FieldDisplay from "@/components/FieldDisplay";
 
 export default function StudentPage() {
   const [student, setStudent] = useState<Student>();
   const [isEditing, setIsEditing] = useState(false);
+  const { control, reset } = useForm();
 
   useEffect(() => {
     const loadStudent = async () => {
@@ -17,6 +26,7 @@ export default function StudentPage() {
       const student = await fetchStudent(studentId);
       if (student) {
         setStudent(student);
+        reset(student);
       } else {
         console.error(`Student was not found: (id: ${studentId})`);
       }
@@ -25,8 +35,16 @@ export default function StudentPage() {
     loadStudent();
   }, []);
 
+  const handleCancel = () => {
+    setIsEditing(false);
+  };
+
+  const handleSave = () => {
+    setIsEditing(false);
+  };
+
   /** Student section **/
-  const heading = "Students";
+  const heading = "Student Profile";
 
   return (
     <PageContainer>
@@ -36,11 +54,11 @@ export default function StudentPage() {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Typography variant="h5">Students</Typography>
+          <Typography variant="h5">{`${student?.familyName}, ${student?.givenName} ${student?.middleName ? `${student?.middleName?.charAt(0)}.` : ""} ${student?.suffix}`}</Typography>
         </Stack>
+
         <>
           <Typography variant="h6">{heading}</Typography>
-
           <Paper elevation={2} sx={{ p: 4 }}>
             <Stack direction="row" justifyContent="end">
               <EditIcon
@@ -51,22 +69,20 @@ export default function StudentPage() {
             <Grid container spacing={2}>
               <Grid container size={12} spacing={4}>
                 <Grid size={3}>
-                  <FieldDisplay
-                    isEditing={isEditing}
-                    label="Student ID"
-                    value={student?.id}
-                  >
-                    {({ label, value }) => (
-                      <TextField
-                        label={label}
-                        variant="standard"
-                        value={value}
-                      />
-                    )}
-                  </FieldDisplay>
+                  <Stack>
+                    <Typography variant="caption">Student ID</Typography>
+                    <Typography variant="body1" fontWeight="bold">
+                      {student?.id}
+                    </Typography>
+                  </Stack>
                 </Grid>
                 <Grid size={3}>
-                  <FieldDisplay label="Status" value="ACTIVE" />
+                  <Stack>
+                    <Typography variant="caption">Status</Typography>
+                    <Typography variant="body1" fontWeight="bold">
+                      ACTIVE
+                    </Typography>
+                  </Stack>
                 </Grid>
               </Grid>
 
@@ -74,62 +90,44 @@ export default function StudentPage() {
                 <Grid size={3}>
                   <FieldDisplay
                     isEditing={isEditing}
+                    name="familyName"
+                    control={control}
                     label="Family Name"
-                    value={student?.familyName}
                   >
-                    {({ label, value }) => (
-                      <TextField
-                        label={label}
-                        value={value}
-                        variant="standard"
-                      />
-                    )}
-                  </FieldDisplay>
-                </Grid>
-                <Grid size={3}>
-                  <FieldDisplay
-                    isEditing={isEditing}
-                    label="Given Name"
-                    value={student?.givenName}
-                  >
-                    {({ label, value }) => (
-                      <TextField
-                        label={label}
-                        value={value}
-                        variant="standard"
-                      />
-                    )}
+                    <TextField variant="standard" />
                   </FieldDisplay>
                 </Grid>
 
                 <Grid size={3}>
                   <FieldDisplay
                     isEditing={isEditing}
-                    label="Middle Name"
-                    value={student?.middleName}
+                    name="givenName"
+                    control={control}
+                    label="Given Name"
                   >
-                    {({ label, value }) => (
-                      <TextField
-                        label={label}
-                        value={value}
-                        variant="standard"
-                      />
-                    )}
+                    <TextField variant="standard" />
                   </FieldDisplay>
                 </Grid>
+
                 <Grid size={3}>
                   <FieldDisplay
                     isEditing={isEditing}
-                    label="Suffix"
-                    value={student?.suffix}
+                    name="middleName"
+                    control={control}
+                    label="Middle Name"
                   >
-                    {({ label, value }) => (
-                      <TextField
-                        label={label}
-                        value={value}
-                        variant="standard"
-                      />
-                    )}
+                    <TextField variant="standard" />
+                  </FieldDisplay>
+                </Grid>
+
+                <Grid size={3}>
+                  <FieldDisplay
+                    isEditing={isEditing}
+                    name="suffix"
+                    label="Suffix"
+                    control={control}
+                  >
+                    <TextField variant="standard" />
                   </FieldDisplay>
                 </Grid>
               </Grid>
@@ -138,51 +136,41 @@ export default function StudentPage() {
                 <Grid size={3}>
                   <FieldDisplay
                     isEditing={isEditing}
+                    name="gender"
                     label="Gender <TODO: format>"
-                    value={student?.gender}
+                    control={control}
                   >
-                    {({ label, value }) => (
-                      <TextField
-                        label={label}
-                        value={value}
-                        variant="standard"
-                      />
-                    )}
+                    <TextField variant="standard" />
                   </FieldDisplay>
                 </Grid>
                 <Grid size={3}>
                   <FieldDisplay
                     isEditing={isEditing}
+                    name="dateOfBirth"
                     label="Date of Birth"
-                    value={student?.dateOfBirth}
+                    control={control}
                   >
-                    {({ label, value }) => (
-                      <TextField
-                        label={label}
-                        value={value}
-                        variant="standard"
-                      />
-                    )}
+                    <TextField variant="standard" />
                   </FieldDisplay>
                 </Grid>
 
                 <Grid size={3}>
-                  <FieldDisplay isEditing={false} label="Age" value="<TODO>" />
+                  <Stack>
+                    <Typography variant="caption">Age</Typography>
+                    <Typography variant="body1" fontWeight="bold">
+                      {"<TODO>"}
+                    </Typography>
+                  </Stack>
                 </Grid>
 
                 <Grid size={3}>
                   <FieldDisplay
                     isEditing={isEditing}
+                    name="nationality"
                     label="Nationality"
-                    value={student?.nationality}
+                    control={control}
                   >
-                    {({ label, value }) => (
-                      <TextField
-                        label={label}
-                        value={value}
-                        variant="standard"
-                      />
-                    )}
+                    <TextField variant="standard" />
                   </FieldDisplay>
                 </Grid>
               </Grid>
@@ -191,20 +179,23 @@ export default function StudentPage() {
                 <Grid size={12}>
                   <FieldDisplay
                     isEditing={isEditing}
+                    name="address"
                     label="Address"
-                    value={student?.address}
+                    control={control}
                   >
-                    {({ label, value }) => (
-                      <TextField
-                        label={label}
-                        value={value}
-                        variant="standard"
-                        fullWidth
-                      />
-                    )}
+                    <TextField variant="standard" fullWidth />
                   </FieldDisplay>
                 </Grid>
               </Grid>
+
+              {isEditing && (
+                <Grid container size={12} justifyContent="end">
+                  <Button onClick={handleCancel}>Cancel</Button>
+                  <Button variant="contained" onClick={handleSave}>
+                    Update
+                  </Button>
+                </Grid>
+              )}
             </Grid>
           </Paper>
         </>

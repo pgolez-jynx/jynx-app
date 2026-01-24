@@ -1,25 +1,41 @@
 import { Stack, Typography } from "@mui/material";
-import { ReactNode } from "react";
+import { cloneElement, ReactElement } from "react";
+import { Control, Controller, FieldValues, Path } from "react-hook-form";
 
-export default function FieldDisplay({
-  isEditing = false,
-  label = "Field Label",
-  value = "Value",
+type FieldDisplayProps<T extends FieldValues> = {
+  name: Path<T>;
+  control: Control<T>;
+  label: string;
+  isEditing: boolean;
+  children: ReactElement<unknown>;
+};
+
+export default function FieldDisplay<T extends FieldValues>({
+  name,
+  control,
+  label,
+  isEditing,
   children,
-}: {
-  isEditing?: boolean;
-  label?: string;
-  value?: unknown;
-  children?: (props: { label?: string; value?: unknown }) => ReactNode;
-}) {
-  return isEditing && children ? (
-    children({ label, value })
-  ) : (
-    <Stack>
-      <Typography variant="caption">{label}</Typography>
-      <Typography variant="body1" fontWeight="bold">
-        {value as string}
-      </Typography>
-    </Stack>
+}: FieldDisplayProps<T>) {
+  return (
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) =>
+        isEditing ? (
+          cloneElement(children as ReactElement<Record<string, unknown>>, {
+            ...field,
+            label,
+          })
+        ) : (
+          <Stack>
+            <Typography variant="caption">{label}</Typography>
+            <Typography variant="body1" fontWeight="bold">
+              {field.value ?? "-"}
+            </Typography>
+          </Stack>
+        )
+      }
+    />
   );
 }
