@@ -76,7 +76,9 @@ export default function StudentPage() {
           </Tabs>
         </Box>
 
+        {tabIndex === 0 && <Typography variant="h6">Overview</Typography>}
         {tabIndex === 1 && <StudentProfileTab student={student} />}
+        {tabIndex === 2 && <Typography variant="h6">Enrollment</Typography>}
       </Stack>
     </PageContainer>
   );
