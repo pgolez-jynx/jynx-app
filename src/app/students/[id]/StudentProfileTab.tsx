@@ -1,17 +1,11 @@
 import FieldDisplay from "@/components/FieldDisplay";
 import { Student } from "@/services/student.client";
-import {
-  Typography,
-  Paper,
-  Stack,
-  Grid,
-  TextField,
-  Button,
-} from "@mui/material";
+import { Typography, Stack, Grid, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import EditIcon from "@mui/icons-material/Edit";
 import { formatDate } from "@/app/utils/date-utils";
+import EditableFormContainer from "@/components/EditableFormContainer";
+import SectionContainer from "@/components/SectionContainer";
 
 export default function StudentProfileTab({
   student,
@@ -38,14 +32,15 @@ export default function StudentProfileTab({
   }, [student, reset]);
 
   return (
-    <>
-      <Typography variant="h6">Student Information</Typography>
-      <Paper elevation={2} sx={{ p: 4 }}>
-        <Stack direction="row" justifyContent="end">
-          <EditIcon color="primary" onClick={() => setIsEditing(!isEditing)} />
-        </Stack>
+    <SectionContainer header="Student Information">
+      <EditableFormContainer
+        isEditing={isEditing}
+        setIsEditing={setIsEditing}
+        onSave={handleSave}
+        onCancel={handleCancel}
+      >
         <Grid container spacing={2}>
-          <Grid container size={12} spacing={4}>
+          <Grid container size={12} spacing={2}>
             <Grid size={3}>
               <Stack>
                 <Typography variant="caption">Student ID</Typography>
@@ -64,7 +59,7 @@ export default function StudentProfileTab({
             </Grid>
           </Grid>
 
-          <Grid container size={12} spacing={4}>
+          <Grid container size={12} spacing={2}>
             <Grid size={3}>
               <FieldDisplay
                 isEditing={isEditing}
@@ -110,7 +105,7 @@ export default function StudentProfileTab({
             </Grid>
           </Grid>
 
-          <Grid container size={12} spacing={4}>
+          <Grid container size={12} spacing={2}>
             <Grid size={3}>
               <FieldDisplay
                 isEditing={isEditing}
@@ -154,7 +149,7 @@ export default function StudentProfileTab({
             </Grid>
           </Grid>
 
-          <Grid container size={12} spacing={4}>
+          <Grid container size={12}>
             <Grid size={12}>
               <FieldDisplay
                 isEditing={isEditing}
@@ -166,17 +161,8 @@ export default function StudentProfileTab({
               </FieldDisplay>
             </Grid>
           </Grid>
-
-          {isEditing && (
-            <Grid container size={12} justifyContent="end">
-              <Button onClick={handleCancel}>Cancel</Button>
-              <Button variant="contained" onClick={handleSave}>
-                Update
-              </Button>
-            </Grid>
-          )}
         </Grid>
-      </Paper>
-    </>
+      </EditableFormContainer>
+    </SectionContainer>
   );
 }
