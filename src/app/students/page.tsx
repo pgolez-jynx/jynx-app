@@ -11,14 +11,20 @@ import {
   Link as BreadcrumbLink,
   useTheme,
 } from "@mui/material";
-import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridColDef,
+  GridRowParams,
+  GridRowsProp,
+} from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { formatDate } from "../utils/date-utils";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
 import { blue, pink } from "@mui/material/colors";
 import { StudentIcon } from "@/components/Sidebar";
-import { fetchStudents } from "@/services/student.client";
+import { fetchStudents, Student } from "@/services/student.client";
+import { useRouter } from "next/navigation";
 
 const columns: GridColDef[] = [
   {
@@ -83,8 +89,13 @@ const breadcrumbs = (
 );
 
 export default function StudentsPage() {
-  const [rows, setRows] = useState<GridRowsProp>([]);
   const theme = useTheme();
+  const router = useRouter();
+  const [rows, setRows] = useState<GridRowsProp>([]);
+
+  const handleRowClick = ({ id }: GridRowParams<Student>) => {
+    router.push(`/students/${id}`);
+  };
 
   useEffect(() => {
     const loadStudents = async () => {
@@ -143,6 +154,7 @@ export default function StudentsPage() {
                 sortModel: [{ field: "familyName", sort: "asc" }],
               },
             }}
+            onRowClick={handleRowClick}
           />
         </Paper>
       </Stack>
