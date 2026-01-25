@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import EditIcon from "@mui/icons-material/Edit";
+import { formatDate } from "@/app/utils/date-utils";
 
 export default function StudentProfileTab({
   student,
@@ -43,7 +44,7 @@ export default function StudentProfileTab({
               <Stack>
                 <Typography variant="caption">Student ID</Typography>
                 <Typography variant="body1" fontWeight="bold">
-                  {student?.id}
+                  {student?.studentId}
                 </Typography>
               </Stack>
             </Grid>
@@ -120,6 +121,7 @@ export default function StudentProfileTab({
                 name="dateOfBirth"
                 label="Date of Birth"
                 control={control}
+                valueFormatter={formatDate}
               >
                 <TextField variant="standard" />
               </FieldDisplay>

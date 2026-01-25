@@ -3,18 +3,20 @@ import { cloneElement, ReactElement } from "react";
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
 
 type FieldDisplayProps<T extends FieldValues> = {
+  isEditing: boolean;
   name: Path<T>;
   control: Control<T>;
   label: string;
-  isEditing: boolean;
+  valueFormatter?: (value: string) => string;
   children: ReactElement<unknown>;
 };
 
 export default function FieldDisplay<T extends FieldValues>({
+  isEditing,
   name,
   control,
   label,
-  isEditing,
+  valueFormatter,
   children,
 }: FieldDisplayProps<T>) {
   return (
@@ -31,7 +33,9 @@ export default function FieldDisplay<T extends FieldValues>({
           <Stack>
             <Typography variant="caption">{label}</Typography>
             <Typography variant="body1" fontWeight="bold">
-              {field.value ?? "-"}
+              {valueFormatter
+                ? valueFormatter(field.value)
+                : (field.value ?? "-")}
             </Typography>
           </Stack>
         )
