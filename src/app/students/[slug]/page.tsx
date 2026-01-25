@@ -42,7 +42,7 @@ export default function StudentPage() {
 
   const breadcrumbs = (
     <Breadcrumbs separator="›" aria-label="breadcrumb">
-      <BreadcrumbLink underline="hover" key="1" href="/enrollment">
+      <BreadcrumbLink underline="hover" key="1" href="/students">
         <Chip icon={<StudentIcon />} label="Students" color="primary" />
       </BreadcrumbLink>
       <Typography key="2" sx={{ color: "primary.main" }} variant="body2">
@@ -68,17 +68,14 @@ export default function StudentPage() {
           <Tabs
             value={tabIndex}
             onChange={(_, newIndex) => setTabIndex(newIndex)}
-            aria-label="basic tabs example"
           >
-            <Tab label="Overview" />
             <Tab label="Student Profile" />
             <Tab label="Enrollment" />
           </Tabs>
         </Box>
 
-        {tabIndex === 0 && <Typography variant="h6">Overview</Typography>}
-        {tabIndex === 1 && <StudentProfileTab student={student} />}
-        {tabIndex === 2 && <Typography variant="h6">Enrollment</Typography>}
+        {tabIndex === 0 && <StudentProfileTab student={student} />}
+        {tabIndex === 1 && <Typography variant="h6">Enrollment</Typography>}
       </Stack>
     </PageContainer>
   );
