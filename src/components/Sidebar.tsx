@@ -95,7 +95,7 @@ export default function Sidebar({ open = true, onClose }: SidebarProps) {
           <ListItemText primary="Enrollment" />
         </ListItemButton>
 
-        <ListItemButton component={Link} href="/dashboard">
+        <ListItemButton component={Link} href="/students">
           <ListItemIcon>
             <StudentIcon />
           </ListItemIcon>
