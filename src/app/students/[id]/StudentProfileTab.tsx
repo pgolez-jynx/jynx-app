@@ -8,7 +8,7 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import EditIcon from "@mui/icons-material/Edit";
 import { formatDate } from "@/app/utils/date-utils";
@@ -19,7 +19,7 @@ export default function StudentProfileTab({
   student: Student | null;
 }) {
   const [isEditing, setIsEditing] = useState(false);
-  const { control } = useForm({
+  const { control, reset } = useForm({
     defaultValues: student ?? undefined,
   });
 
@@ -30,6 +30,12 @@ export default function StudentProfileTab({
   const handleSave = () => {
     setIsEditing(false);
   };
+
+  useEffect(() => {
+    if (student) {
+      reset(student);
+    }
+  }, [student, reset]);
 
   return (
     <>

@@ -15,23 +15,25 @@ import {
 import { useEffect, useState } from "react";
 import { StudentIcon } from "@/components/Sidebar";
 import StudentProfileTab from "./StudentProfileTab";
+import { useParams } from "next/navigation";
 
 export default function StudentPage() {
   const [student, setStudent] = useState<Student | null>(null);
+  const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
+    console.log("USe effect-ing....");
     const loadStudent = async () => {
-      const studentId = "1234";
-      const student = await fetchStudent(studentId);
+      const student = await fetchStudent(id);
       if (student) {
         setStudent(student);
       } else {
-        console.error(`Student was not found: (id: ${studentId})`);
+        console.error(`Student was not found: (id: ${id})`);
       }
     };
 
     loadStudent();
-  }, []);
+  }, [id]);
 
   const studentName = [
     student?.familyName,

@@ -20,7 +20,7 @@ export interface Guardian {
   address: string | null;
 }
 
-export const fetchStudents = (): Student[] => {
+export const fetchStudents = async (): Promise<Student[]> => {
   return [
     {
       id: "d4f5a3c1-3e1b-4b8e-9f7c-0a1d2e3b4c5f",
@@ -529,24 +529,11 @@ export const fetchStudents = (): Student[] => {
   ];
 };
 
-export const fetchStudent = (studentId: string): Student | null => {
-  switch (studentId) {
-    case "1234":
-      return {
-        id: "de83b9a0-6fef-4145-bac6-0517d94a66b6",
-        studentId,
-        givenName: "John",
-        middleName: "Tavera",
-        familyName: "Doe",
-        suffix: "Jr",
-        gender: "M",
-        dateOfBirth: new Date("1998-04-23"),
-        nationality: "Filipino",
-        address: "123 Main St, Cityville, Countryland",
-      };
-    default:
-      return null;
-  }
+export const fetchStudent = async (id: string): Promise<Student | null> => {
+  const students = await fetchStudents();
+  const targetStudent = students.find((student) => student.id === id);
+
+  return targetStudent ?? null;
 };
 
 export const fetchStudentGuardians = (studentId: string): Guardian[] => {
@@ -558,12 +545,14 @@ export const fetchStudentGuardians = (studentId: string): Guardian[] => {
           contactNumber: "09171234567",
           emailAddress: "jane.doe@example.com",
           addressSameAsStudent: true,
+          address: null,
         },
         {
           name: "John Doe",
           relationship: "Father",
           contactNumber: "09171234568",
           emailAddress: "john.doe@example.com",
+          addressSameAsStudent: null,
           address: "381, Other St, Cityville, Countryland",
         },
       ]
