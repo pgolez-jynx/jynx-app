@@ -27,6 +27,10 @@ export const EnrollmentIcon: React.FC<SvgIconProps> = (props) => (
   <AppRegistrationIcon {...props} />
 );
 
+export const StudentIcon: React.FC<SvgIconProps> = (props) => (
+  <AccountBoxIcon {...props} />
+);
+
 interface SidebarProps {
   open: boolean;
   onClose: () => void;
@@ -93,7 +97,7 @@ export default function Sidebar({ open = true, onClose }: SidebarProps) {
 
         <ListItemButton component={Link} href="/dashboard">
           <ListItemIcon>
-            <AccountBoxIcon />
+            <StudentIcon />
           </ListItemIcon>
           <ListItemText primary="Students" />
         </ListItemButton>
