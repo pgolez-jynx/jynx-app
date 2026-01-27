@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { StudentIcon } from "@/components/Sidebar";
 import StudentProfileTab from "./StudentProfileTab";
 import { useParams } from "next/navigation";
+import EnrollmentTab from "./EnrollmentTab";
 
 export default function StudentPage() {
   const [student, setStudent] = useState<Student | null>(null);
@@ -36,7 +37,7 @@ export default function StudentPage() {
   }, [id]);
 
   const studentName = [
-    student?.familyName,
+    student?.familyName + ",",
     student?.givenName,
     student?.middleName ? `${student?.middleName?.charAt(0)}.` : "",
     student?.suffix,
@@ -53,7 +54,7 @@ export default function StudentPage() {
     </Breadcrumbs>
   );
 
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(1);
 
   return (
     <PageContainer breadcrumbs={breadcrumbs}>
@@ -77,7 +78,7 @@ export default function StudentPage() {
         </Box>
 
         {tabIndex === 0 && <StudentProfileTab student={student} />}
-        {tabIndex === 1 && <Typography variant="h6">Enrollment</Typography>}
+        {tabIndex === 1 && <EnrollmentTab />}
       </Stack>
     </PageContainer>
   );
