@@ -63,7 +63,7 @@ export default function EnrollmentStudentProfilePanel({
 
   const handleStudentInfoChange = <K extends keyof Student>(
     key: K,
-    value: Student[K]
+    value: Student[K],
   ) =>
     onUpdate({
       student: {
@@ -146,7 +146,7 @@ export default function EnrollmentStudentProfilePanel({
                     onChange={(e) =>
                       handleStudentInfoChange(
                         "middleName",
-                        e.target.value || undefined
+                        e.target.value || null,
                       )
                     }
                   />
@@ -157,10 +157,7 @@ export default function EnrollmentStudentProfilePanel({
                     label="Suffix"
                     value={student?.suffix}
                     onChange={(e) =>
-                      handleStudentInfoChange(
-                        "suffix",
-                        e.target.value || undefined
-                      )
+                      handleStudentInfoChange("suffix", e.target.value || null)
                     }
                   />
                 </Box>

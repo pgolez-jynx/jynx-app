@@ -85,7 +85,9 @@ export default function EnrollmentGuardianInfoPanel({
               <FormGroup>
                 <FormControlLabel
                   control={
-                    <Checkbox checked={guardian?.addressSameAsStudent} />
+                    <Checkbox
+                      checked={guardian?.addressSameAsStudent ?? false}
+                    />
                   }
                   label="Same as student's address"
                   sx={{

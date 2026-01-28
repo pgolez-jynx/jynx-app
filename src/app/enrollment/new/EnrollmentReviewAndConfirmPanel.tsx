@@ -2,6 +2,7 @@
 
 import { Divider, Grid, Paper, Typography } from "@mui/material";
 import { AddEnrollmentDto } from "./dto";
+import { formatDate } from "@/app/utils/date-utils";
 
 export default function EnrollmentReviewAndConfirmPanel({
   enrollment,
@@ -48,7 +49,9 @@ export default function EnrollmentReviewAndConfirmPanel({
             </Grid>
             <Grid size={2}>
               <Typography variant="subtitle2">Date of Birth</Typography>
-              <Typography fontWeight="bold">{student?.dateOfBirth}</Typography>
+              <Typography fontWeight="bold">
+                {student?.dateOfBirth ? formatDate(student?.dateOfBirth) : ""}
+              </Typography>
             </Grid>
             <Grid size={2}>
               <Typography variant="subtitle2">Nationality</Typography>
