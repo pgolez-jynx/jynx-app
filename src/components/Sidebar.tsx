@@ -2,7 +2,6 @@
 
 import {
   Box,
-  Divider,
   Drawer,
   IconButton,
   List,
@@ -15,7 +14,7 @@ import {
 } from "@mui/material";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 // import SchoolIcon from "@mui/icons-material/School";
-// import ClassIcon from "@mui/icons-material/Class";
+import ClassIcon from "@mui/icons-material/Class";
 import Link from "next/link";
 import SchoolYearSelect from "./SchoolYearSelect";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -29,6 +28,10 @@ export const EnrollmentIcon: React.FC<SvgIconProps> = (props) => (
 
 export const StudentIcon: React.FC<SvgIconProps> = (props) => (
   <AccountBoxIcon {...props} />
+);
+
+export const SectionIcon: React.FC<SvgIconProps> = (props) => (
+  <ClassIcon {...props} />
 );
 
 interface SidebarProps {
@@ -100,18 +103,18 @@ export default function Sidebar({ open = true, onClose }: SidebarProps) {
           <ListItemText primary="Students" />
         </ListItemButton>
 
+        <ListItemButton component={Link} href="/sections">
+          <ListItemIcon>
+            <ClassIcon />
+          </ListItemIcon>
+          <ListItemText primary="Sections" />
+        </ListItemButton>
+
         {/* <ListItemButton component={Link} href="/dashboard/users">
           <ListItemIcon>
             <SchoolIcon />
           </ListItemIcon>
           <ListItemText primary="Faculty" />
-        </ListItemButton> */}
-
-        {/* <ListItemButton component={Link} href="/dashboard/settings">
-          <ListItemIcon>
-            <ClassIcon />
-          </ListItemIcon>
-          <ListItemText primary="Classes" />
         </ListItemButton> */}
       </List>
     </Drawer>
