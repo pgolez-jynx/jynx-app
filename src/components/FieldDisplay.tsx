@@ -7,7 +7,7 @@ type FieldDisplayProps<T extends FieldValues> = {
   name: Path<T>;
   control: Control<T>;
   label: string;
-  valueFormatter?: (value: string) => string;
+  valueFormatter?: (value: string | object) => string;
   children: ReactElement<unknown>;
 };
 

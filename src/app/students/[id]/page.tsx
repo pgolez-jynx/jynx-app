@@ -23,7 +23,6 @@ export default function StudentPage() {
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
-    console.log("USe effect-ing....");
     const loadStudent = async () => {
       const student = await fetchStudent(id);
       if (student) {

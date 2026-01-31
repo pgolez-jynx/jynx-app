@@ -17,6 +17,16 @@ export default function EditableFormContainer({
   onSave,
   onCancel,
 }: EditableFormContainerProps) {
+  const handleCancel = () => {
+    setIsEditing(false);
+    onCancel();
+  };
+
+  const handleSave = () => {
+    setIsEditing(false);
+    onSave();
+  };
+
   return (
     <Stack spacing={4}>
       <Stack direction="row" justifyContent="end">
@@ -31,10 +41,10 @@ export default function EditableFormContainer({
       {children}
       {isEditing && (
         <Stack direction="row" justifyContent="end" spacing={2}>
-          <Button variant="outlined" onClick={onCancel}>
+          <Button variant="outlined" onClick={handleCancel}>
             Cancel
           </Button>
-          <Button variant="contained" onClick={onSave}>
+          <Button variant="contained" onClick={handleSave}>
             Save
           </Button>
         </Stack>
