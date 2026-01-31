@@ -54,7 +54,7 @@ export default function StudentPage() {
     </Breadcrumbs>
   );
 
-  const [tabIndex, setTabIndex] = useState(1);
+  const [tabIndex, setTabIndex] = useState(0);
 
   return (
     <PageContainer breadcrumbs={breadcrumbs}>

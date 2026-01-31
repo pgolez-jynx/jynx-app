@@ -1,10 +1,11 @@
 import FieldDisplay from "@/components/FieldDisplay";
-import { Typography, Stack, Grid, TextField } from "@mui/material";
+import { Typography, Stack, Grid, TextField, Box } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import SectionContainer from "@/components/SectionContainer";
 import EditableFormContainer from "@/components/EditableFormContainer";
 import ClassScheduleCalendar from "./ClassScheduleCalendar";
+import SchoolYearSelect from "@/components/SchoolYearSelect";
 
 export default function EnrollmentTab() {
   const [isEditing, setIsEditing] = useState(false);
@@ -17,7 +18,10 @@ export default function EnrollmentTab() {
 
   return (
     <Stack spacing={2}>
-      <SectionContainer header="Grade Level & Section">
+      <SectionContainer
+        header="Grade Level & Section"
+        headerRight={<SchoolYearSelect schoolYearOptions={[2025, 2026]} />}
+      >
         <Stack spacing={4}>
           <EditableFormContainer
             isEditing={isEditing}
