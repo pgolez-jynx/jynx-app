@@ -11,6 +11,14 @@ export type Section = {
 };
 
 export const fetchSections = async (): Promise<Section[]> => {
+  return getAllSections();
+};
+
+export const fetchSection = async (id: string): Promise<Section | null> => {
+  return getAllSections().find((section) => section.id === id) ?? null;
+};
+
+function getAllSections(): Section[] {
   return [
     {
       id: "9b6a8f3e-6c4f-4e6d-8e8a-0b7f5a2d9c41",
@@ -155,4 +163,4 @@ export const fetchSections = async (): Promise<Section[]> => {
       studentCount: 26,
     },
   ];
-};
+}
