@@ -33,7 +33,7 @@ export default function FieldDisplay<T extends FieldValues>({
           <Stack>
             <Typography variant="caption">{label}</Typography>
             <Typography variant="body1" fontWeight="bold">
-              {valueFormatter
+              {field.value && valueFormatter
                 ? valueFormatter(field.value)
                 : (field.value ?? "-")}
             </Typography>
