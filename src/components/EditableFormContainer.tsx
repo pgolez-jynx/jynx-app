@@ -19,12 +19,12 @@ export default function EditableFormContainer({
 }: EditableFormContainerProps) {
   const handleCancel = () => {
     setIsEditing(false);
-    onCancel();
+    if (onCancel) onCancel();
   };
 
   const handleSave = () => {
     setIsEditing(false);
-    onSave();
+    if (onSave) onSave();
   };
 
   return (

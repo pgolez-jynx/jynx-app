@@ -122,7 +122,9 @@ export default function StudentProfileTab({
                 name="dateOfBirth"
                 label="Date of Birth"
                 control={control}
-                valueFormatter={formatDate}
+                valueFormatter={
+                  formatDate as (value: string | object) => string
+                }
               >
                 <TextField variant="standard" />
               </FieldDisplay>
