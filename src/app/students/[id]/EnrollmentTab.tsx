@@ -1,5 +1,5 @@
 import FieldDisplay from "@/components/FieldDisplay";
-import { Typography, Stack, Grid, TextField, Box } from "@mui/material";
+import { Typography, Stack, Grid, TextField } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import SectionContainer from "@/components/SectionContainer";

@@ -14,8 +14,8 @@ import {
   Toolbar,
 } from "@mui/material";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import SchoolIcon from "@mui/icons-material/School";
-import ClassIcon from "@mui/icons-material/Class";
+// import SchoolIcon from "@mui/icons-material/School";
+// import ClassIcon from "@mui/icons-material/Class";
 import Link from "next/link";
 import SchoolYearSelect from "./SchoolYearSelect";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -86,8 +86,6 @@ export default function Sidebar({ open = true, onClose }: SidebarProps) {
           </IconButton>
         </DrawerHeader>
 
-        <Divider />
-
         <ListItemButton component={Link} href="/enrollment">
           <ListItemIcon>
             <EnrollmentIcon />
@@ -102,19 +100,19 @@ export default function Sidebar({ open = true, onClose }: SidebarProps) {
           <ListItemText primary="Students" />
         </ListItemButton>
 
-        <ListItemButton component={Link} href="/dashboard/users">
+        {/* <ListItemButton component={Link} href="/dashboard/users">
           <ListItemIcon>
             <SchoolIcon />
           </ListItemIcon>
           <ListItemText primary="Faculty" />
-        </ListItemButton>
+        </ListItemButton> */}
 
-        <ListItemButton component={Link} href="/dashboard/settings">
+        {/* <ListItemButton component={Link} href="/dashboard/settings">
           <ListItemIcon>
             <ClassIcon />
           </ListItemIcon>
           <ListItemText primary="Classes" />
-        </ListItemButton>
+        </ListItemButton> */}
       </List>
     </Drawer>
   );
